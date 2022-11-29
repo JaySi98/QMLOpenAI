@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="back">Resources/Images/back.png</file>
+        <file alias="drawer">Resources/Images/drawer.png</file>
+        <file alias="menu">Resources/Images/menu.png</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>
