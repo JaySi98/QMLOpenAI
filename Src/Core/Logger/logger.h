@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QDebug>
 #include <QFile>
+#include <QFileInfo>
 #include <QDateTime>
 #include <QDir>
 #include <QTextStream>
@@ -15,12 +16,14 @@ class Logger: public QObject
     Q_OBJECT
 public:
     explicit Logger(QObject *parent = nullptr);
+    ~Logger();
 
     static void atttach();
     static void handler(QtMsgType type, const QMessageLogContext & context, const QString &msg);
 
     static bool logging;
-    static QString filename;
+    static QString filename;    
+    static QFile logFile;
 };
 
 #endif // LOGGER_H

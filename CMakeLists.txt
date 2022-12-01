@@ -12,8 +12,13 @@ find_package(Qt6 6.2 COMPONENTS Quick QuickControls2 REQUIRED)
 # .cpp and .h files here
 set(PROJECT_SOURCES
     Src/main.cpp
-    Src/Logger/logger.h
-    Src/Logger/logger.cpp
+
+    Src/Core/Logger/logger.h
+    Src/Core/Logger/logger.cpp
+    Src/Core/Settings/settings.h
+    Src/Core/Settings/settings.cpp
+    Src/Core/Config/config.h
+    Src/Core/Config/config.cpp
 )
 
 qt_add_executable(appQMLTemplate    
