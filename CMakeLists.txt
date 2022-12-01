@@ -35,6 +35,42 @@ qt_add_qml_module(appQMLTemplate
 #    QML_FILES QML/*.qml
 )
 
+# config file
+configure_file(Src/Core/Config/config.h.in Src/Core/Config/config.h)
+
+############################################################
+# External Libraries
+############################################################
+option(ADD_BOOST   "Include boost lib in the project"   ON)
+option(ADD_OPENCV  "Include opencv lib in the project"  ON)
+
+# BOOST
+if(ADD_BOOST)
+    set(Boost_FIND_REQUIRED TRUE)
+    set(Boost_FIND_QUIETLY TRUE)
+    set(Boost_DEBUG FALSE)
+    set(Boost_USE_MULTITHREADED TRUE)
+    set(Boost_USE_STATIC_LIBS TRUE)
+
+    find_package(Boost COMPONENTS regex)
+
+    list(APPEND EXTRA_INCLUDES ${Boost_INCLUDE_DIRS})
+    list(APPEND EXTRA_LINKS    ${Boost_LIBRARIES})
+endif()
+
+# OPENCV
+if(ADD_OPENCV)
+    find_package(OpenCV REQUIRED)
+
+    list(APPEND EXTRA_INCLUDES ${OpenCV_INCLUDE_DIRS})
+    list(APPEND EXTRA_LINKS    ${OpenCV_LIBS})
+endif()
+
+############################################################
+# Target
+############################################################
+add_subdirectory(Tests)
+
 set_target_properties(appQMLTemplate PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}

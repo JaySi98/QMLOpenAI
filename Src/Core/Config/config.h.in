@@ -1,0 +1,5 @@
+#define project_VERSION_MAJOR @project_VERSION_MAJOR@
+#define project_VERSION_MINOR @project_VERSION_MINOR@
+
+#define ADD_OPENCV
+#define ADD_BOOST
