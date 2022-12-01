@@ -11,12 +11,12 @@ Settings::~Settings()
     settings.sync();
 }
 
-void Settings::init()
+void Settings::init(QSharedPointer<QMap<const QString, const QVariant>> sett)
 {
     if(settings.allKeys().length() == 0)
     {
-        qInfo() << "Initalizing application settings";
-        // TODO
+        qInfo() << "Initalizing default application settings";
+        save(*sett);
     }
     else
     {

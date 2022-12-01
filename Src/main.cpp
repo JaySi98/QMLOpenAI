@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include "Core/Logger/logger.h"
 #include "Core/Settings/settings.h"
+#include "Core/Config/config.h"
 
 void init(int argc, char *argv[]);
 
@@ -29,10 +30,9 @@ int main(int argc, char *argv[])
 
 void init(int argc, char *argv[])
 {
-    // TODO
-    QCoreApplication::setOrganizationName(" ");
-    QCoreApplication::setApplicationName(" ");
+    QCoreApplication::setOrganizationName(PROJECT_NAME);
+    QCoreApplication::setApplicationName(COMPANY_NAME);
 
     Settings settings;
-    settings.init();
+    settings.init(defaultSettings());
 }
