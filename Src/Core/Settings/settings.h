@@ -13,10 +13,10 @@ public:
     explicit Settings(QObject *parent = nullptr);
     ~Settings();
 
-    void init(QSharedPointer<QMap<const QString, const QVariant>> settings);
+    void init(const QMap<QString, QVariant> settings);
     void printAll();
     void save(const QString key, const QVariant& value);
-    void save(QMap<const QString, const QVariant>& sett);
+    void save(const QMap<QString, QVariant>& sett);
     QVariant load(QString key);
 
 private:

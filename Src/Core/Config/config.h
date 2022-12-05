@@ -13,6 +13,5 @@
 #define PROJECT_NAME "QML Template"
 #define COMPANY_NAME "-"
 
-QSharedPointer<QMap<const QString, const QVariant>> defaultSettings();
 
 #endif // CONFIG_H

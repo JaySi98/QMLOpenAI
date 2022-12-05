@@ -11,12 +11,12 @@ Settings::~Settings()
     settings.sync();
 }
 
-void Settings::init(QSharedPointer<QMap<const QString, const QVariant>> sett)
+void Settings::init(const QMap<QString, QVariant> values)
 {
     if(settings.allKeys().length() == 0)
     {
         qInfo() << "Initalizing default application settings";
-        save(*sett);
+        save(values);
     }
     else
     {
@@ -41,9 +41,9 @@ void Settings::save(const QString key, const QVariant &value)
     qInfo() << settings.status();
 }
 
-void Settings::save(QMap<const QString, const QVariant> &sett)
+void Settings::save(const QMap<QString, QVariant> &sett)
 {
-    QMapIterator<const QString, const QVariant> iter(sett);
+    QMapIterator<QString, QVariant> iter(sett);
     while (iter.hasNext())
     {
         iter.next();

@@ -33,6 +33,11 @@ void init(int argc, char *argv[])
     QCoreApplication::setOrganizationName(PROJECT_NAME);
     QCoreApplication::setApplicationName(COMPANY_NAME);
 
+    const QMap<QString, QVariant> values =
+    {
+//        QPair<QString, QVariant>{"value", 100},
+    };
+
     Settings settings;
-    settings.init(defaultSettings());
+    settings.init(values);
 }
