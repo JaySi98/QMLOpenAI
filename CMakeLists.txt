@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(QMLTemplate VERSION 0.1 LANGUAGES CXX)
+project(OpenAI VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -20,15 +20,15 @@ set(PROJECT_SOURCES
     Src/Core/Settings/settings.cpp
 )
 
-qt_add_executable(appQMLTemplate    
+qt_add_executable(appOpenAI
     Resources.qrc
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
 )
 
 # .qml files here
-qt_add_qml_module(appQMLTemplate
-    URI QMLTemplate
+qt_add_qml_module(appOpenAI
+    URI OpenAI
     VERSION 1.0
     QML_FILES main.qml 
 #    QML_FILES QML/*.qml
@@ -68,9 +68,8 @@ endif()
 ############################################################
 # Target
 ############################################################
-add_subdirectory(Tests)
 
-set_target_properties(appQMLTemplate PROPERTIES
+set_target_properties(appOpenAI PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -78,8 +77,8 @@ set_target_properties(appQMLTemplate PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_compile_definitions(appQMLTemplate
+target_compile_definitions(appOpenAI
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-target_link_libraries(appQMLTemplate
+target_link_libraries(appOpenAI
     PRIVATE Qt6::Quick
     PRIVATE Qt6::QuickControls2)
