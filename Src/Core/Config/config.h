@@ -10,7 +10,7 @@
 
 #define ADD_OPENCV
 #define ADD_BOOST
-#define PROJECT_NAME "QML Template"
+#define PROJECT_NAME "OpenAI Client"
 #define COMPANY_NAME "-"
 
 

@@ -3,32 +3,44 @@
 #include "Core/Logger/logger.h"
 #include "Core/Settings/settings.h"
 #include "Core/Config/config.h"
+#include "Core/CommandParse/commandparse.h"
 
-void init(int argc, char *argv[]);
+void init();
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     Logger logger;
+
+    CommandLineParse::parse(app.arguments());
     logger.atttach();
 
-    init(argc, argv);
-
-    QQmlApplicationEngine engine;
-    const QUrl url(u"qrc:/OpenAI/main.qml"_qs);
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,&app,
-                     [url](QObject *obj, const QUrl &objUrl)
+    if(CommandLineParse::consoleVersion())
     {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
+        // TODO
+        qDebug() << "Console version selected!";
+    }
+    else
+    {
+        init();
+        QQmlApplicationEngine engine;
+        const QUrl url(u"qrc:/OpenAI/main.qml"_qs);
+        QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,&app,
+                         [url](QObject *obj, const QUrl &objUrl)
+        {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
 
-    }, Qt::QueuedConnection);
+        }, Qt::QueuedConnection);
 
-    engine.load(url);
-    return app.exec();
+        engine.load(url);
+        return app.exec();
+    }
+
+    return EXIT_SUCCESS;
 }
 
-void init(int argc, char *argv[])
+void init()
 {
     QCoreApplication::setOrganizationName(PROJECT_NAME);
     QCoreApplication::setApplicationName(COMPANY_NAME);

@@ -18,6 +18,8 @@ set(PROJECT_SOURCES
     Src/Core/Logger/logger.cpp
     Src/Core/Settings/settings.h
     Src/Core/Settings/settings.cpp
+    Src/Core/CommandParse/commandparse.cpp
+    Src/Core/CommandParse/commandparse.h
 )
 
 qt_add_executable(appOpenAI
