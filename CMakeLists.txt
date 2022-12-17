@@ -7,7 +7,7 @@ set(CMAKE_AUTORCC ON)
 set(AUTORCC_OPTIONS "Resources.qrc")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.2 COMPONENTS Quick QuickControls2 REQUIRED)
+find_package(Qt6 6.2 COMPONENTS Quick QuickControls2 Network REQUIRED)
 
 # .cpp and .h files here
 set(PROJECT_SOURCES
@@ -20,6 +20,9 @@ set(PROJECT_SOURCES
     Src/Core/Settings/settings.cpp
     Src/Core/CommandParse/commandparse.cpp
     Src/Core/CommandParse/commandparse.h
+
+    Src/API/manager.cpp
+    Src/API/manager.h
 )
 
 qt_add_executable(appOpenAI
@@ -83,4 +86,5 @@ target_compile_definitions(appOpenAI
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(appOpenAI
     PRIVATE Qt6::Quick
-    PRIVATE Qt6::QuickControls2)
+    PRIVATE Qt6::QuickControls2
+    PRIVATE Qt${QT_VERSION_MAJOR}::Network)

@@ -53,3 +53,7 @@ void init()
     Settings settings;
     settings.init(values);
 }
+
+
+//curl -v -I  https://api.openai.com/v1/models -H 'Authorization: Bearer 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'
+
