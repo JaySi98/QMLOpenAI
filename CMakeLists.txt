@@ -18,8 +18,10 @@ set(PROJECT_SOURCES
     Src/Core/Logger/logger.cpp
     Src/Core/Settings/settings.h
     Src/Core/Settings/settings.cpp
-    Src/Core/CommandParse/commandparse.cpp
-    Src/Core/CommandParse/commandparse.h
+    Src/Core/CommandLine/commandparse.cpp
+    Src/Core/CommandLine/commandparse.h
+    Src/Core/CommandLine/commandlinemode.cpp
+    Src/Core/CommandLine/commandlinemode.h
 
     Src/API/manager.cpp
     Src/API/manager.h

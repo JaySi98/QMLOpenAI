@@ -3,7 +3,8 @@
 #include "Core/Logger/logger.h"
 #include "Core/Settings/settings.h"
 #include "Core/Config/config.h"
-#include "Core/CommandParse/commandparse.h"
+#include "Core/CommandLine/commandparse.h"
+#include "Core/CommandLine/commandlinemode.h"
 
 void init();
 
@@ -17,8 +18,7 @@ int main(int argc, char *argv[])
 
     if(CommandLineParse::consoleVersion())
     {
-        // TODO
-        qDebug() << "Console version selected!";
+        CommandLineMode::run();
     }
     else
     {
@@ -53,7 +53,3 @@ void init()
     Settings settings;
     settings.init(values);
 }
-
-
-//curl -v -I  https://api.openai.com/v1/models -H 'Authorization: Bearer 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'
-
