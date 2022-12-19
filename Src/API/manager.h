@@ -3,6 +3,11 @@
 
 #include <QObject>
 #include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QNetworkProxy>
+#include <QUrl>
+#include <QAuthenticator>
 
 class Manager : public QObject
 {
@@ -10,11 +15,29 @@ class Manager : public QObject
 public:
     explicit Manager(QObject *parent = nullptr);
 
-signals:
+public slots:
+    void sendRequest(QNetworkRequest request);
 
 private:
-    QNetworkAccessManager manager;
 
+    typedef enum
+    {
+        STATUS_NONE,
+        STATUS_OK,
+        STATUS_ERROR,
+    }requestStatus;
+
+    QNetworkAccessManager manager;
+    QByteArray data;
+    requestStatus status;
+
+private slots:
+    void ReadyRead();
+    void SSLError(QNetworkReply* reply, const QList<QSslError> &errors);
+    void ReplyError(QNetworkReply::NetworkError errorCode);
+    void replyFinished();
+
+signals:
 };
 
 #endif // MANAGER_H

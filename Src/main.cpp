@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 
     CommandLineParse::parse(app.arguments());
     logger.atttach();
+    init();
 
     if(CommandLineParse::consoleVersion())
     {
@@ -22,7 +23,6 @@ int main(int argc, char *argv[])
     }
     else
     {
-        init();
         QQmlApplicationEngine engine;
         const QUrl url(u"qrc:/OpenAI/main.qml"_qs);
         QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,&app,

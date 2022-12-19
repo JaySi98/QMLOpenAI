@@ -1,6 +1,21 @@
 #include <QDebug>
 #include <QString>
 #include "commandlinemode.h"
+#include "commandparse.h"
+#include "Src/Core/Settings/settings.h"
+
+class ParameterNotSpecifiedException: public std::exception
+{
+public:
+    ParameterNotSpecifiedException(char* message): message(message){}
+    char* what()
+    {
+        return message;
+    }
+
+private:
+    char* message;
+};
 
 QString getAPIKey();
 QString getAIModel();
@@ -10,13 +25,19 @@ void CommandLineMode::run()
 {
     qDebug() << "CommandLineMode::run() called";
 
+    QString key;
+    QString model;
+    QString request;
+
     try
     {
-
+        key = getAPIKey();
+        model = getAIModel();
+        request = getRequest();
     }
-    catch(...)
+    catch(std::exception e)
     {
-        qDebug() << "CommandLineMode::run() failed";
+        qCritical() << "CommandLineMode::run() failed";
         return;
     }
 
@@ -25,24 +46,37 @@ void CommandLineMode::run()
 
 QString getAPIKey()
 {
-    QString key;
+    Settings settings;
+    if(CommandLineParse::APIKeySet())
+    {
+        settings.save("key", CommandLineParse::APIKey());
+        return CommandLineParse::APIKey();
 
-    //TODO
-    return key;
+    }
+    else if(settings.load("key") != 0)
+    {
+        return settings.load("key").toString();
+    }
+
+    throw ParameterNotSpecifiedException((char*)"API key not specified");
 }
 
 QString getAIModel()
 {
-    QString model;
+    if(CommandLineParse::APIKeySet())
+    {
+        return CommandLineParse::APIKey();
+    }
 
-    //TODO
-    return model;
+    throw ParameterNotSpecifiedException((char*)"API key not specified");
 }
 
 QString getRequest()
 {
-    QString request;
+    if(CommandLineParse::commandSet())
+    {
+        return CommandLineParse::requestedCommand();
+    }
 
-    //TODO
-    return request;
+    throw ParameterNotSpecifiedException((char*)"Request not specified");
 }

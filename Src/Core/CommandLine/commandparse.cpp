@@ -45,29 +45,29 @@ int CommandLineParse::parse(QStringList arguments)
 
         if(parser.isSet(consoleOption))
         {
-            qDebug() << "Console mode selected";
             parseResult |= CommandConsoleVersion;
+//            qDebug() << "Console mode selected";
         }
 
         if(parser.isSet(keyOption))
         {
             parseResult |= CommandAPIKeySet;
             apiKey = parser.value(keyOption);
-            qDebug() << "API key set: " << apiKey;
+//            qDebug() << "API key set: " << apiKey;
         }
 
         if(parser.isSet(modelOption))
         {
             parseResult |= CommandModelSet;
             model = parser.value(modelOption);
-            qDebug() << "Model set: " << model;
+//            qDebug() << "Model set: " << model;
         }
 
         if(parser.isSet(commandOption))
         {
             parseResult |= CommandRequestSet;
             request = parser.value(commandOption);
-            qDebug() << "Request set: " << request;
+//            qDebug() << "Request set: " << request;
         }
     }
 

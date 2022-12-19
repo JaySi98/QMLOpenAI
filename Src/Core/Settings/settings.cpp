@@ -56,6 +56,7 @@ QVariant Settings::load(QString key)
     if(!settings.contains(key))
     {
         qInfo() << "Settings dont contain: " + key + " value";
+        return 0;
     }
 
     return settings.value(key);
